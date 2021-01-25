@@ -1,46 +1,129 @@
 <template>
-  <div>
+  <header class="gridx">
     <div v-if="!this.loggedin">
-      <div class="con-type-example">
-        <vs-navbar
-          :type="type"
-          v-model="activeItem"
-          class="nabarx spacing-added-to-nav"
-        >
-          <div slot="title">
-          
-            <vs-navbar-title>
-            <vs-avatar
+      <vs-navbar
+        :type="type"
+        v-model="activeItem"
+        color="black"
+        class="topnavbar"
+        text-color="orange"
+        active-text-color="orange"
+      >
+        <!---
+      Template logo
+      -->
+        <div slot="title" class="themelogo">
+          <vs-avatar
             size="55px"
-            src="https://i.ibb.co/WVnj7xk/2723432.png">
-              Logo under construction
-              </vs-avatar>
-            </vs-navbar-title>
-            
+            src="https://i.ibb.co/WVnj7xk/2723432.png"
+            alt="Dashboard"
+          />
+          <span class="logo-text"></span>
+          <h3>
+            foodify
+          </h3>
+        </div>
+        <!---
+      Mobile toggle
+      -->
+        <div slot="title">
+          <div class="hiddenDesktop cursor-pointer" @click.stop="activeSidebar">
+            <vs-icon icon="menu"></vs-icon>
           </div>
-          <vs-navbar-item class="spacing-navbar-element">
+        </div>
+
+        <!---
+      Craete new dd
+      -->
+
+        <vs-input
+          size="50%"
+          class="searching-bt"
+          icon-after="true"
+          icon="search"
+          placeholder="Search Here"
+          v-model="search"
+        />
+
+        <vs-spacer></vs-spacer>
+
+        <!---
+      Craete new dd
+      -->
+        <vs-dropdown
+          vs-trigger-click
+          left
+          class="cursor-pointer pr-2 pl-2 ml-1 mr-1"
+        >
+          <a class="text-white-dark" href="#">
+            <vs-icon size="70%" icon="account_circle"></vs-icon>
+          </a>
+          <vs-dropdown-menu class="topbar-dd">
+            <vs-dropdown-item></vs-dropdown-item>
             <Signup />
-          </vs-navbar-item>
-          <vs-navbar-item class="spacing-navbar-element">
+            <vs-dropdown-item></vs-dropdown-item>
             <Signin :login="this.login" />
-          </vs-navbar-item>
-          <vs-navbar-item class="spacing-navbar-element">
-            <span @click="gotoAbout">About-Us</span>
-          </vs-navbar-item>
-          <vs-input icon="search" placeholder="Search" v-model="search"/>
-        </vs-navbar>
-      </div>
-      <div class="main">
-        <div class="d1"></div>
-        <div class="d2"></div>
-        <div class="d3"></div>
-        <div class="d4"></div>
-      </div>
+          </vs-dropdown-menu>
+          <vs-spacer></vs-spacer>
+        </vs-dropdown>
+        <vs-button>
+          <vs-icon size="70%" icon="public"></vs-icon>
+        </vs-button>
+        <!---
+      Craete new dd
+      -->
+        <vs-dropdown
+          vs-trigger-click
+          left
+          class="cursor-pointer pr-2 pl-2 ml-1 mr-1"
+        >
+          <a class="text-white-dark" href="#">
+            <vs-icon icon="dashboard"></vs-icon>
+          </a>
+          <vs-dropdown-menu class="topbar-dd">
+            <vs-dropdown-item @click="gotoAbout">About-Us</vs-dropdown-item>
+            <vs-dropdown-item>Help</vs-dropdown-item>
+          </vs-dropdown-menu>
+        </vs-dropdown>
+        <!---
+      Craete new dd
+      -->
+      </vs-navbar>
     </div>
-    <div v-else>
-      <Mainfeed />
-    </div>
-  </div>
+    <footer>
+      <div class="hero">
+        <div class="hero-inner">
+          <div class="hero-title">
+            <h1 class="text-light title font-2">Take a Deep Bite</h1>
+          </div>
+
+          <a href="#" class="sd">Scroll Down</a>
+        </div>
+      </div>
+      <div class="content clearfix">
+        <div class="container" style="padding-top: 60px">
+          <div class="row">
+            <div class="col-md-5">
+              <h2 class="text-uppercase">rame ipsum</h2>
+              <p class="font-alt">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui
+                voluptatibus molestia!
+              </p>
+            </div>
+            <div class="col-md-7">
+              <p style="padding-top: 47px">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam
+                earum eos corporis totam vel, eaque sapiente officiis sint culpa
+                inventore blanditiis hic cupiditate illo nam assumenda
+                reprehenderit suscipit dolorum.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="container" style="height: 100vh"></div>
+      </div>
+    </footer>
+  </header>
 </template>
 
 <script>
@@ -66,19 +149,40 @@ export default {
         text: "Default",
       },
     ],
+    colorx: "black",
+    indexActive: 0,
+    name: "Navbar",
+    props: {
+      topbarColor: {
+        type: String,
+        default: "black",
+      },
+      title: {
+        type: String,
+      },
+      logo: {
+        type: String,
+      },
+    },
+    indexActive: 0,
+    showToggle: false,
+    search: "",
   }),
-  mounted: function() {
+  mounted() {
     Cookies.get("name") ? (this.loggedin = true) : (this.loggedin = false);
   },
-
   methods: {
+    ///////////////////////////////////////////////////
+    activeSidebar() {
+      this.$store.commit("IS_SIDEBAR_ACTIVE", true);
+    },
     ////////////////////////////////////////////////////
     async login(useremail, password) {
       try {
-        const resp = await axios.post(
-          "/api/loginsignup/login",
-          { useremail, password }
-        );
+        const resp = await axios.post("/api/loginsignup/login", {
+          useremail,
+          password,
+        });
         if (resp.data === "user_not_found") {
           console.log("moush mawjoud");
           alert("wrong credentials");
@@ -98,120 +202,148 @@ export default {
     ///////////////////////////////////////////////////////
     gotoAbout() {
       this.$router.push("/about");
-      
     },
   },
 };
 </script>
 
 <style scoped>
-.spacing-added-to-nav {
-  padding: 1rem 2.4rem;
-  background: #fff;
+@import url(
+  https://fonts.googleapis.com/css?family=Montserrat:400,
+  700|Josefin+Sans:400,
+  600,
+  700,
+  400italic,
+  600italic
+);
+
+.title {
+  text-shadow: -0.1px -0.5px 0.5rem #000;
 }
-.spacing-navbar-element {
+
+.topnavbar {
+  opacity: 0.8;
+  shadow: 1.6;
+}
+body {
+  font-family: "josefin sans";
+  font-size: 16px;
+}
+/* https://images.pexels.com/photos/704971/pexels-photo-704971.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500 */
+.hero {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 9;
+  transition: all 1.6s cubic-bezier(0.86, 0, 0.07, 1);
+}
+.hero.scrolled {
+  transform: translate3d(0, -100%, 0) scale(0.75);
+  opacity: 0;
+}
+.hero-inner {
+  background-image: url("https://images.unsplash.com/photo-1505935428862-770b6f24f629");
+  background-size: cover;
+  background-position: center;
+  display: table;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+}
+.hero-title {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: montserrat;
+}
+.font-2 {
+  font-family: "josefin sans";
+  font-weight: 700;
+}
+.title {
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+.text-light {
+  color: #fff;
+}
+.font-alt {
+  font-family: "georgia";
+  font-style: italic;
+  color: #666;
+}
+.hero {
+  overflow: hidden;
+  z-index: 1;
+}
+.content {
+  position: relative;
+  background-color: #fff;
+  border-top: 10px solid black;
+  padding: 0;
+  margin: 0;
+  transition: all 1.6s cubic-bezier(0.86, 0, 0.07, 1);
+  transform: translate3d(0, 20px, 0) scale(0.75);
+  opacity: 0;
+}
+.content.scrolled {
+  transform: translate3d(0, 0, 0) scale(1);
+  opacity: 1;
+}
+.sd {
+  color: #fff;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.sd:hover,
+.sd:focus {
+  color: #fff;
+  opacity: 0.7;
+  text-decoration: none;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:400, 500, 300, 700);
+
+* {
+  font-family: Roboto;
+}
+.footyx {
+  color: black;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@1,900&display=swap");
+.themelogo {
   margin: 0 0.6rem;
 }
-.button-nav-spacing {
-  width: 7.6rem;
-  border-radius: 25px;
+
+.searching-bt {
+  background-color: transparent;
+  border: none;
+  color: #333;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
+    Helvetica, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", メイリオ,
+    Meiryo, "ＭＳ Ｐゴシック", Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 16px;
+  font-weight: normal;
+  height: 100%;
+  outline: none;
+  padding: 0;
+  width: 40% !important;
 }
-span {
-  cursor: pointer;
-}
-.main {
-  height: 74vh;
-  width: 90%;
-  margin-top: 5rem;
-  margin-left: 8rem;
-  position: relative;
-}
-.d1 {
-  position: absolute;
-  background-image: url(https://i.imgur.com/mEuvnp0.jpg);
-  background-size: 2700px 1500px;
-  height: 22vh;
-  width: 12vw;
-  background-position: 0 50%;
-  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.8);
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 5;
-  animation: dd1 10s 1, dd12 10s 1;
-  animation-delay: 4s, 14s;
-  border-radius: 2.6rem;
-}
-.d2 {
-  position: absolute;
-  background-image: url(https://i.imgur.com/mEuvnp0.jpg);
-  background-size: 2700px 1500px;
-  height: 40vh;
-  width: 20vw;
-  background-position: -10vw 50%;
-  left: 10vw;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 1;
-  animation: dd2 10s 2;
-  animation-delay: 4s;
-  border-radius: 2.6rem;
-}
-.d3 {
-  position: absolute;
-  background-image: url(https://i.imgur.com/mEuvnp0.jpg);
-  background-size: 2700px 1500px;
-  overflow: hidden;
-  height: 86vh;
-  width: 40vw;
-  left: 25vw;
-  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.8);
-  background-position: -35vw 50%;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 3;
-  animation: dd3 10s 2;
-  animation-delay: 4s;
-  border-radius: 2.6rem;
-}
-.d4 {
-  position: absolute;
-  overflow: hidden;
-  background-image: url(https://i.imgur.com/mEuvnp0.jpg);
-  background-size: 2700px 1500px;
-  height: 60vh;
-  width: 20vw;
-  left: 60vw;
-  background-position: -70vw 50%;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 1;
-  animation: dd4 10s 2;
-  animation-delay: 4s;
-  border-radius: 2.6rem;
-}
-@keyframes dd1 {
-  50% {
-    width: 90vw;
-  }
-}
-@keyframes dd12 {
-  50% {
-    background-position: Calc(-40vw) 50%;
-  }
-}
-@keyframes dd2 {
-  50% {
-    background-position: Calc(-50vw) 50%;
-  }
-}
-@keyframes dd3 {
-  50% {
-    background-position: Calc(-75vw) 50%;
-  }
-}
-@keyframes dd4 {
-  50% {
-    background-position: Calc(-110vw) 50%;
-  }
+h3 {
+  font-family: "Rubik", sans-serif !important;
 }
 </style>

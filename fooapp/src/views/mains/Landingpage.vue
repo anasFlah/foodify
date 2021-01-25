@@ -8,9 +8,15 @@
           class="nabarx spacing-added-to-nav"
         >
           <div slot="title">
+          
             <vs-navbar-title>
+            <vs-avatar
+            size="55px"
+            src="https://i.ibb.co/WVnj7xk/2723432.png">
               Logo under construction
+              </vs-avatar>
             </vs-navbar-title>
+            
           </div>
           <vs-navbar-item class="spacing-navbar-element">
             <Signup />
@@ -21,6 +27,7 @@
           <vs-navbar-item class="spacing-navbar-element">
             <span @click="gotoAbout">About-Us</span>
           </vs-navbar-item>
+          <vs-input icon="search" placeholder="Search" v-model="search"/>
         </vs-navbar>
       </div>
       <div class="main">

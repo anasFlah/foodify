@@ -2,15 +2,18 @@
   <div>
     <div class="con-type-example">
       <vs-navbar
+        
         :type="type"
         v-model="activeItem"
         class="nabarx spacing-added-to-nav">
         <div slot="title">
           <vs-navbar-title>
+           
             Logo under construction
           </vs-navbar-title>
+  
         </div>
-
+ 
         <vs-navbar-item class="spacing-navbar-element">
           {{ name }}
         </vs-navbar-item>

@@ -2,13 +2,13 @@
   <div>
     <div class="centerx">
       <vs-button
-        @click="popupActivo = true"
+        @click="popupActivo2 = true"
         color="primary"
         type="border"
         class="button-nav-spacing"
         >sign-in</vs-button
       >
-      <vs-popup class="holamundo" title="Sign-in" :active.sync="popupActivo">
+      <vs-popup class="holamundo" title="Sign-in" :active.sync="popupActivo2">
         <h3></h3>
         <div class="default-input d-flex align-items-center">
           <vs-input
@@ -50,13 +50,13 @@ export default {
   },
   props: { login: Function },
   data: () => ({
-    popupActivo: false,
+    popupActivo2: false,
     email: "",
     password: "",
   }),
   methods: {
     signup() {
-      this.popupActivo = false;
+      this.popupActivo2 = false;
     },
   },
 };
@@ -76,11 +76,10 @@ export default {
 }
 .button-nav-spacing {
   width: 7.6rem;
-  border-radius: 25px;
+  margin-left: 2rem;
 }
 .button-inside-sign-spacing {
   width: 7.6rem;
-  border-radius: 25px;
   margin: 1.2rem 0 1rem 0;
 }
 </style>

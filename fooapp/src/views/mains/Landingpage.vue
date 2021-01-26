@@ -50,44 +50,26 @@
         <!---
       Craete new dd
       -->
-        <vs-dropdown
-          vs-trigger-click
-          left
-          class="cursor-pointer pr-2 pl-2 ml-1 mr-1"
-        >
-          <a class="text-white-dark" href="#">
-            <vs-icon size="70%" icon="account_circle"></vs-icon>
-          </a>
-          <vs-dropdown-menu class="topbar-dd">
-            <vs-dropdown-item></vs-dropdown-item>
-            <Signup />
-            <vs-dropdown-item></vs-dropdown-item>
-            <Signin :login="this.login" />
-          </vs-dropdown-menu>
-          <vs-spacer></vs-spacer>
-        </vs-dropdown>
-        <vs-button>
-          <vs-icon size="70%" icon="public"></vs-icon>
-        </vs-button>
+          <Signup />
+  
+          <Signin :login="this.login" />
+       
         <!---
       Craete new dd
       -->
-        <vs-dropdown
-          vs-trigger-click
-          left
-          class="cursor-pointer pr-2 pl-2 ml-1 mr-1"
-        >
-          <a class="text-white-dark" href="#">
-            <vs-icon icon="dashboard"></vs-icon>
-          </a>
-          <vs-dropdown-menu class="topbar-dd">
-            <vs-dropdown-item @click="gotoAbout">About-Us</vs-dropdown-item>
-            <vs-dropdown-item>Help</vs-dropdown-item>
+      <div class="d-flex align-items-center">
+          <div class="d-flex align-items-center dropdownbtn-alignment">
+          <vs-dropdown>
+          <vs-button class="btn-drop" type="filled" icon="expand_more">about</vs-button>
+          <!-- <a href="#">Hola mundo</a> -->
+          <vs-dropdown-menu>
+          <vs-dropdown-item  label="Dashboard" icon="dashboard" @click="gotoAbout">About-Us</vs-dropdown-item>
           </vs-dropdown-menu>
-        </vs-dropdown>
-        <!---
-      Craete new dd
-      -->
+          
+          </vs-dropdown>
+          </div>
+          </div>
+   
       </vs-navbar>
     </div>
     <footer>
@@ -106,16 +88,12 @@
             <div class="col-md-5">
               <h2 class="text-uppercase">rame ipsum</h2>
               <p class="font-alt">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui
-                voluptatibus molestia!
+              qsdqsfqsf
               </p>
             </div>
             <div class="col-md-7">
               <p style="padding-top: 47px">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam
-                earum eos corporis totam vel, eaque sapiente officiis sint culpa
-                inventore blanditiis hic cupiditate illo nam assumenda
-                reprehenderit suscipit dolorum.
+              qsdfqsf
               </p>
             </div>
           </div>
@@ -208,6 +186,7 @@ export default {
 </script>
 
 <style scoped>
+
 @import url(
   https://fonts.googleapis.com/css?family=Montserrat:400,
   700|Josefin+Sans:400,
@@ -216,6 +195,7 @@ export default {
   400italic,
   600italic
 );
+
 
 .title {
   text-shadow: -0.1px -0.5px 0.5rem #000;
@@ -345,5 +325,11 @@ h6 {
 }
 h3 {
   font-family: "Rubik", sans-serif !important;
+}
+.btn-drop{
+ 
+    margin-left: 14px;
+    display: flow-root;
+    margin-right: 12px;
 }
 </style>

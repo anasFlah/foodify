@@ -1,5 +1,6 @@
 <template lang="html">
   <div id="pop-btn">
+ 
     <vs-button
       @click="popupActivo = true"
       color="primary"
@@ -8,13 +9,14 @@
       >Sign Up</vs-button
     >
     <vs-popup
-      class="holamundo"
+      class="signup-form signup-form signup-form"
       title="Create Your Account !"
       :active.sync="popupActivo"
     >
+     
       <vs-input
         label="Username"
-        class="inputx"
+        class="horizontal-group form-group left form-group right label-title"
         placeholder="Placeholder"
         v-model="fname"
       />
@@ -27,10 +29,22 @@
       <vs-input
         type="password"
         label="Password"
-        class="inputx"
+        class="horizontal-group form-group left label-title form-input"
         placeholder="Password"
         v-model="password"
       />
+        <div class="form-group right">
+    <vs-label for="confirm-password" class="label-title">Confirm Password *</vs-label>
+    <vs-input type="password" class="form-input" id="confirm-password" placeholder="enter your password again" required="required"></vs-input>
+  </div>
+            <div class="horizontal-group">
+  
+  <div class="form-group right">
+    <vs-label for="experience" class="label-title">Age</vs-label>
+    <vs-slider :color="colorx" v-model="value1"/>
+    
+  </div>
+ </div> 
       <span
         @click="
           checkemptyinput(),
@@ -46,11 +60,13 @@
           @click="openLoadingColor"
           type="filled"
           color="primary"
-          class="button-inside-sign-spacing"
+          class="form-header"
           >Register</vs-button
         >
       </span>
+  
     </vs-popup>
+  
   </div>
 </template>
 
@@ -63,6 +79,7 @@ export default {
   name: "Signup",
   data() {
     return {
+       value1:24,
       colorLoading: "#7d0c3f",
       popupActivo: false,
       fname: "",
@@ -122,21 +139,37 @@ export default {
     },
   },
 };
+   var rangeLabel = document.getElementById("range-label");
+      var experience = document.getElementById("experience");
+      function change() {
+      rangeLabel.innerText = experience.value + "K";
+      }
 </script>
 <style scoped>
-.holamundo {
-  text-align: center;
+@import url('httpss://fonts.googleapis.com/css?family=Roboto');
+
+.avataro{
+
 }
-.inputx {
-  margin: 1rem auto;
+
+.signup-form {
+  font-family: "Roboto", sans-serif;
+  width:600px auto;
+  margin:65px auto;
+  border-radius: 100px;
+}
+.form-header h1 {
+  font-size: 30px;
+  text-align:center;
+  color:#666;
+  padding:20px 0;
+  border-bottom:1px solid #cccccc;
 }
 .button-nav-spacing {
   width: 7.6rem;
-  border-radius: 25px;
 }
 .button-inside-sign-spacing {
   width: 7.6rem;
-  border-radius: 25px;
   margin: 1.2rem 0 1rem 0;
 }
 </style>

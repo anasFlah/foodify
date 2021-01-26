@@ -1,6 +1,6 @@
 /* eslint-disable */
 <template lang="html">
-  <div class="centerx">
+  <div class="centerxx">
     <div>
       {{/*this is the btn that inside the navbar that contain home,dahsboared,profile need to link*/}}
       <vs-tabs :color="primary">
@@ -347,3 +347,8 @@ export default {
   }),
 };
 </script>
+<style>
+.centerxx{
+background-image: url("https://images.unsplash.com/photo-1497034825429-c343d7c6a68f");
+}
+</style>

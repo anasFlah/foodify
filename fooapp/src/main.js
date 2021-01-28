@@ -13,6 +13,10 @@ import store from "./store/store";
 import "prismjs";
 import "prismjs/themes/prism.css";
 import VsPrism from "./components/prism/VsPrism.vue";
+import AOS from 'aos';
+//slide show
+import "@/assets/scss/style.scss";
+import 'aos/dist/aos.css';
 Vue.component(VsPrism.name, VsPrism);
 
 // Vue Router
@@ -30,6 +34,17 @@ Vue.use(Vuesax, {
 new Vue({
   store,
   router,
+  created () {
+    AOS.init({
+
+    easing:"ease-out-back",
+    duration:1000,
+    })
+  },
   render: (h) => h(App),
 }).$mount("#app");
-import "@/assets/scss/style.scss";
+//scroll anim
+
+
+
+

@@ -12,14 +12,19 @@ router.post("/login", async (req, res) => {
       if (!doc) {
         res.json("user_not_found");
       } else {
-        bcrypt.compare(user.password, doc.password, function (err, result) {
-          console.log(result);
-          if (result !== false) {
-            res.status(200).json(doc);
-          } else {
-            res.status(500).json("wrong infos");
-          }
-        });
+        if(bcrypt.compareSync(user.password, doc.password)){
+          res.status(200).json(doc);
+        } else {
+          res.status(500).json("wrong infos");
+        }
+        // bcrypt.compare(user.password, doc.password, function (err, result) {
+        //   console.log(result);
+        //   if (result !== false) {
+        //     res.status(200).json(doc);
+        //   } else {
+        //     res.status(500).json("wrong infos");
+        //   }
+        // });
       }
     });
   } catch (error) {
@@ -28,7 +33,7 @@ router.post("/login", async (req, res) => {
 });
 //////////////////////////////////////////////////////
 router.post("/signup", async (req, res) => {
-  const user = new users(req.body);e
+  const user = new users(req.body);
   try {
     const users = await user.save();
     if (!users) throw new Error("Something went wrong saving the users");

@@ -18,6 +18,10 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  password1:{
+    type:String,
+    required: true,
+  },
   status: {
     type: String,
     default: "user",

@@ -34,13 +34,13 @@
         v-model="password"
       />
         <div class="form-group right">
-    <vs-label for="confirm-password" class="label-title">Confirm Password *</vs-label>
-    <vs-input type="password" class="form-input" id="confirm-password" placeholder="enter your password again" required="required"></vs-input>
+    <label for="confirm-password" class="label-title">Confirm Password *</label>
+    <vs-input  v-model="password1" type="password" class="form-input" id="confirm-password" placeholder="enter your password again" required="required"></vs-input>
   </div>
             <div class="horizontal-group">
   
   <div class="form-group right">
-    <vs-label for="experience" class="label-title">Age</vs-label>
+    <label for="experience" class="label-title">Age</label>
     <vs-slider :color="colorx" v-model="value1"/>
     
   </div>
@@ -79,22 +79,24 @@ export default {
   name: "Signup",
   data() {
     return {
+      colorx:"primary",
        value1:24,
       colorLoading: "#7d0c3f",
       popupActivo: false,
       fname: "",
       email: "",
       password: "",
+      password1:"",
     };
   },
   methods: {
-    async signup(username, useremail, password) {
+    async signup(username, useremail, password,password1) {
       var salt = bcrypt.genSaltSync(10);
-      var hash = bcrypt.hashSync(password, salt);
+      var hash = bcrypt.hashSync(password,password1, salt);
       try {
         const resp = await axios.post(
           "http://localhost:3000/api/loginsignup/signup",
-          { username, useremail, password: hash }
+          { username, useremail, password: hash,password1:hash }
         );
         this.popupActivo = false;
         console.log("saved");

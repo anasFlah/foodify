@@ -9,6 +9,7 @@
         text-color="orange"
         active-text-color="orange"
       >
+   
         <!---
       Template logo
       -->
@@ -32,10 +33,6 @@
           </div>
         </div>
 
-        <!---
-      Craete new dd
-      -->
-
         <vs-input
           size="50%"
           class="searching-bt"
@@ -50,62 +47,60 @@
         <!---
       Craete new dd
       -->
-          <Signup />
-  
-          <Signin :login="this.login" />
-       
+        <Signup />
+
+        <Signin :login="this.login" />
+
         <!---
       Craete new dd
       -->
-      <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center">
           <div class="d-flex align-items-center dropdownbtn-alignment">
-          <vs-dropdown>
-          <vs-button class="btn-drop" type="filled" icon="expand_more">about</vs-button>
-          <!-- <a href="#">Hola mundo</a> -->
-          <vs-dropdown-menu>
-          <vs-dropdown-item  label="Dashboard" icon="dashboard" @click="gotoAbout">About-Us</vs-dropdown-item>
-          </vs-dropdown-menu>
-          
-          </vs-dropdown>
+            <vs-dropdown>
+              <vs-button class="btn-drop" type="filled" icon="expand_more"
+                >about</vs-button
+              >
+              <!-- <a href="#">Hola mundo</a> -->
+              <vs-dropdown-menu>
+                <vs-dropdown-item
+                  label="Dashboard"
+                  icon="dashboard"
+                  @click="gotoAbout"
+                  >About-Us</vs-dropdown-item
+                >
+              </vs-dropdown-menu>
+            </vs-dropdown>
           </div>
-          </div>
-   
+        </div>
       </vs-navbar>
+</div>
+<div v-else>
+      <Mainfeed />
     </div>
-    <footer>
       <div class="hero">
         <div class="hero-inner">
           <div class="hero-title">
             <h1 class="text-light title font-2">Take a Deep Bite</h1>
           </div>
-
-          <a href="#" class="sd">Scroll Down</a>
-        </div>
-      </div>
-      <div class="content clearfix">
-        <div class="container" style="padding-top: 60px">
-          <div class="row">
-            <div class="col-md-5">
-              <h2 class="text-uppercase">rame ipsum</h2>
-              <p class="font-alt">
-              qsdqsfqsf
-              </p>
-            </div>
-            <div class="col-md-7">
-              <p style="padding-top: 47px">
-              qsdfqsf
-              </p>
-            </div>
+        
+          <i class="chevron bottom"></i>
+          <div class="col-md-7">
+            <p style="padding-top: 47px"></p>
           </div>
         </div>
-        <div class="container" style="height: 100vh"></div>
       </div>
-    </footer>
+
+     
+    
+      
+
+    
   </header>
 </template>
 
 <script>
 /* eslint-disable */
+
 import Signin from "../sign-in-up/Signin";
 import Signup from "../sign-in-up/Signup";
 import Mainfeed from "../mains/Mainfeed";
@@ -118,6 +113,7 @@ export default {
     Mainfeed,
   },
   data: () => ({
+    aos: "animation_name",
     loggedin: false,
     activeItem: 0,
     type: "Default",
@@ -186,7 +182,6 @@ export default {
 </script>
 
 <style scoped>
-
 @import url(
   https://fonts.googleapis.com/css?family=Montserrat:400,
   700|Josefin+Sans:400,
@@ -195,7 +190,9 @@ export default {
   400italic,
   600italic
 );
-
+#container {
+  background-image: url("https://images.unsplash.com/photo-1505935428862-770b6f24f629");
+}
 
 .title {
   text-shadow: -0.1px -0.5px 0.5rem #000;
@@ -213,7 +210,7 @@ body {
 .hero {
   height: 100vh;
   width: 100%;
-  position: fixed;
+  position: relative;
   top: 0;
   z-index: 9;
   transition: all 1.6s cubic-bezier(0.86, 0, 0.07, 1);
@@ -229,7 +226,7 @@ body {
   display: table;
   width: 100%;
   height: 100vh;
-  position: fixed;
+  position: relative;
   top: 0;
 }
 .hero-title {
@@ -266,6 +263,7 @@ h6 {
   z-index: 1;
 }
 .content {
+  background-image: url("https://images.unsplash.com/photo-1561284081-ebf6c977bbde");
   position: relative;
   background-color: #fff;
   border-top: 10px solid black;
@@ -276,6 +274,7 @@ h6 {
   opacity: 0;
 }
 .content.scrolled {
+  background-image: url("https://images.unsplash.com/photo-1561284081-ebf6c977bbde");
   transform: translate3d(0, 0, 0) scale(1);
   opacity: 1;
 }
@@ -326,10 +325,164 @@ h6 {
 h3 {
   font-family: "Rubik", sans-serif !important;
 }
-.btn-drop{
- 
-    margin-left: 14px;
-    display: flow-root;
-    margin-right: 12px;
+.btn-drop {
+  margin-left: 14px;
+  display: flow-root;
+  margin-right: 12px;
+}
+/*////////////slide///////////////////////////////////////////////////////////////////////////////////////////////*/
+.hero__scroll .chevron {
+  margin-top: 20px;
+  display: block;
+  -webkit-animation: pulse 2s infinite;
+  animation: pulse 2s infinite;
+  color: #ff4081;
+}
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+user agent stylesheet i {
+  font-style: italic;
+}
+.hero__scroll {
+  position: absolute;
+  bottom: 60px;
+  width: 200px;
+  margin: auto;
+  display: block;
+  cursor: pointer;
+  padding-bottom: 40px;
+  left: 0;
+  right: 0;
+  text-transform: uppercase;
+}
+.hero {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  text-align: center;
+}
+body {
+  font-family: Helvetica, Tahoma;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+.chevron.bottom:before {
+  top: 0;
+  -webkit-transform: rotate(135deg);
+  -ms-transform: rotate(135deg);
+  transform: rotate(135deg);
+}
+.chevron::before {
+  border-style: solid;
+  border-width: 0.25em 0.25em 0 0;
+  content: "";
+  display: inline-block;
+  height: 20px;
+  position: relative;
+  -webkit-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  vertical-align: top;
+  width: 20px;
+}
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+0% {
+  -webkit-transform: translate(0, 0);
+  transform: translate(0, 0);
+}
+50% {
+  -webkit-transform: translate(0, 10px);
+  transform: translate(0, 10px);
+}
+100% {
+  -webkit-transform: translate(0, 0);
+  transform: translate(0, 0);
+}
+[data-aos][data-aos][data-aos-delay="800"].aos-animate,
+body[data-aos-delay="800"] [data-aos].aos-animate {
+  transition-delay: 0.8s;
+}
+[data-aos^="fade"][data-aos^="fade"].aos-animate {
+  opacity: 1;
+  transform: translateZ(0);
+}
+[data-aos][data-aos][data-aos-easing="ease"],
+body[data-aos-easing="ease"] [data-aos] {
+  transition-timing-function: ease;
+}
+[data-aos][data-aos][data-aos-delay="800"],
+body[data-aos-delay="800"] [data-aos] {
+  transition-delay: 0;
+}
+[data-aos][data-aos][data-aos-easing="ease-out-back"],
+body[data-aos-easing="ease-out-back"] [data-aos] {
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+[data-aos][data-aos][data-aos-duration="1000"],
+body[data-aos-duration="1000"] [data-aos] {
+  transition-duration: 1s;
+}
+[data-aos^="fade"][data-aos^="fade"] {
+  opacity: 0;
+  transition-property: opacity, transform;
+}
+.hero__scroll {
+  position: absolute;
+  bottom: 60px;
+  width: 200px;
+  margin: auto;
+  display: block;
+  cursor: pointer;
+  padding-bottom: 40px;
+  left: 0;
+  right: 0;
+  text-transform: uppercase;
+}
+[data-aos="fade-up"] {
+  transform: translate3d(0, 100px, 0);
+}
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+.hero {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  text-align: center;
+}
+body {
+  font-family: Helvetica, Tahoma;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
 }
 </style>
